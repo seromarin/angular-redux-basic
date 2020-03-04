@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'angular-redux-basic';
+  title: string;
+  counter: number;
+
+  constructor() {
+    this.title = 'Contador';
+    this.counter = 0;
+  }
+
+  increment() {
+    this.counter++;
+  }
+
+  decrement() {
+    this.counter--;
+  }
 }
