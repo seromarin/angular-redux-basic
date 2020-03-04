@@ -7,3 +7,11 @@
     <button (click)="divide()" class="btn btn-info">Divide</button>
   </div>
 </div>
+
+<hr>
+
+<div class="row text-center">
+  <div class="col">
+    <app-nieto [counter]="counter" (counterChange)="resetNieto($event)"></app-nieto>
+  </div>
+</div>

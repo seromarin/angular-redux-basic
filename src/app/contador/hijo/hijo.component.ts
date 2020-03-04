@@ -25,5 +25,10 @@ export class HijoComponent implements OnInit {
     this.counterChange.emit(this.counter);
   }
 
+  resetNieto(evt) {
+    this.counter = evt;
+    this.counterChange.emit(0);
+  }
+
 
 }
