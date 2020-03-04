@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
     this.counter$ = this.store.pipe(select('counter'));
   }
 
-  increase(number: number) {
-    this.store.dispatch(increment());
+  increase(operator: number) {
+    this.store.dispatch(increment({ operator }));
   }
 
-  decrease(number: number) {
-    this.store.dispatch(decrement());
+  decrease(operator: number) {
+    this.store.dispatch(decrement({ operator }));
   }
 }

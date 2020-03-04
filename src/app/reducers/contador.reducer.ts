@@ -5,7 +5,7 @@ import { increment, decrement, reset, multiply, divide } from '../actions/counte
 export const initialState = 0;
 
 const _counterReducer = createReducer(initialState,
-  on(increment, state => state + 1),
+  on(increment, (state, { operator }) => state + Number(operator)),
   on(decrement, state => state - 1),
   on(multiply, state => state * 2),
   on(divide, state => state <= 0 ? Math.ceil(state / 2) : Math.floor(state / 2)),
