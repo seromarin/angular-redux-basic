@@ -1,13 +1,17 @@
 <div class="row text-center">
   <div class="col">
     <h1>{{ title }}</h1>
-    <h2>{{ counter }}</h2>
+    <h2>{{ counter$ | async }}</h2>
   </div>
 </div>
 <div class="row text-center">
   <div class="col">
-    <button (click)="increment()" class="btn btn-primary">Increment</button>
-    <button (click)="decrement()" class="btn  btn-info">Decrement</button>
+    <button (click)="increase(number.value)" class="btn btn-primary">Increment</button>
+    <button (click)="decrease(number.value)" class="btn  btn-info">Decrement</button>
+    <div class="operationQuatity">
+      <label class="label">(+/-)</label>
+      <input class="numeric-input" type="number" #number value="0">
+    </div>
   </div>
 </div>
 
@@ -15,6 +19,6 @@
 
 <div class="row text-center">
   <div class="col">
-    <app-hijo [counter]="counter" (counterChange)="counter = $event"></app-hijo>
+    <app-hijo></app-hijo>
   </div>
 </div>

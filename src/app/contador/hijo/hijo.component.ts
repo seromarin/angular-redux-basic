@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import CounterState from 'src/app/interfaces/counter.interface';
+import { multiply, divide } from 'src/app/actions/counter.action';
 
 @Component({
   selector: 'app-hijo',
@@ -7,27 +11,22 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class HijoComponent implements OnInit {
 
-  @Input() counter: number;
-  @Output() counterChange: EventEmitter<number> = new EventEmitter<number>();
+  counter$: Observable<number>;
 
-  constructor() { }
+  constructor(
+    private store: Store<CounterState>
+  ) { }
 
   ngOnInit(): void {
+    this.counter$ = this.store.pipe(select('counter'));
   }
 
   multiply() {
-    this.counter *= 2;
-    this.counterChange.emit(this.counter);
+    this.store.dispatch(multiply());
   }
 
   divide() {
-    this.counter = this.counter >= 0 ? Math.floor(this.counter /= 2) : Math.ceil(this.counter /= 2);
-    this.counterChange.emit(this.counter);
-  }
-
-  resetNieto(evt) {
-    this.counter = evt;
-    this.counterChange.emit(0);
+    this.store.dispatch(divide());
   }
 
 

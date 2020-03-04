@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import CounterState from 'src/app/interfaces/counter.interface';
+import { reset } from 'src/app/actions/counter.action';
 
 @Component({
   selector: 'app-nieto',
@@ -7,17 +11,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class NietoComponent implements OnInit {
 
-  @Input() counter: number;
-  @Output() counterChange: EventEmitter<number> = new EventEmitter<number>();
+  counter$: Observable<number>;
 
-  constructor() { }
+  constructor(
+    private store: Store<CounterState>
+  ) { }
 
   ngOnInit(): void {
+    this.counter$ = this.store.pipe(select('counter'));
   }
 
   reset() {
-    this.counter = 0;
-    this.counterChange.emit(this.counter);
+    this.store.dispatch(reset())
   }
 
 }
